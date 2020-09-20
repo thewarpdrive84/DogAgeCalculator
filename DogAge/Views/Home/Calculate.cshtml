@@ -1,0 +1,64 @@
+﻿@model DogAgeCalculator.Models.Dog
+
+<h1>How old is your dog in human years?</h1>
+<h4>
+    Your dog's human age depends on what size they are. A common rule of thumb for dog owners is that one year for dogs is equivalent to seven human years.
+    But new research shows that young puppies age much faster than young humans do, so that simple one-to-seven year ratio is wrong.
+</h4>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+<div class="col-md-6 col-md-offset-3 text-center">
+    <div class="form-group">
+        @Html.LabelFor(model => model.WeightPounds, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-lg-10">
+            @Html.EditorFor(model => model.WeightPounds, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.WeightPounds, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.AgeYears, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-lg-10">
+            @Html.EditorFor(model => model.AgeYears, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.AgeYears, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Calculate" class="btn btn-warning" />
+            </div>
+        </div>
+
+        @if (IsPost)
+        {
+         <div class="jumbotron" style="font-size:30px" >
+            <div>
+                <b>
+                    @Html.DisplayNameFor(model => model.SizeCategory)
+                    @Html.DisplayFor(model => model.SizeCategory)
+                </b>
+            </div>
+            <div>
+                <b>
+                    @Html.DisplayNameFor(model => model.AgeValue)
+                    @Html.DisplayFor(model => model.AgeValue)
+                </b>
+            </div>
+         </div>
+        }
+    </div>
+    }
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
